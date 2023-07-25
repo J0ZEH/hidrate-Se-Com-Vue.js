@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Hidrate-se</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <h1>Beba água!</h1>
+
+    <div>
+      <label for="metaDoDia">Meta diária de ingestão de água (ml): </label>
+      <input type="number" id="metaDoDia" v-model="metaDiaria">
+      <button @click="definirMeta">Definir Meta</button>
+    </div>
+
+    <div v-if="mostrarLembrete">
+      <p></p>
+      <label for="aguaConsumida">Quantidade de água ingerida (ml): </label>
+      <input type="number" id="aguaConsumida" v-model="quantidadeConsumida">
+      <button @click="registrarConsumo">Registrar Consumo</button>
+      <p>Consumo atual de água: {{consumoAtual}} ml</p>
+      <p>Você precisa beber mais água para bater a sua meta!</p>
+    </div>
+    <div v-else>
+      <p>Consumo atual de água: {{consumoAtual}} ml</p>
+      <p>Você atingiu a meta de hoje.</p>
+    </div>
+
+  </div>
+
+
+  
+  <script>
+
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        metaDiaria: 2000,
+        quantidadeConsumida: 0,
+        consumoAtual: 0,
+      },
+      methods: {
+        definirMeta(){
+          if (this.metaDiaria > 0){
+            this.consumoAtual = 0;
+          }
+        },
+        registrarConsumo(){
+          if (this.quantidadeConsumida > 0){
+            this.consumoAtual = this.consumoAtual + parseInt(this.quantidadeConsumida);
+            this.quantidadeConsumida = 0;
+            if (this.consumoAtual >= this.metaDiaria){
+              this.mostrarLembrete = false;
+            }
+          }
+        },        
+      },
+      computed: {
+        mostrarLembrete(){
+          return this.consumoAtual < this.metaDiaria;
+        }
+      },
+    });
+
+  </script>
+  
+</body>
+</html>

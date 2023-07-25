@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Kanit'; 
+  src: url('./Kanit-Light.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Kanit';
+  text-align: center;
+  background-color: #a9c1e6;
+}
+
+#app {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+ }
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input{
+  max-width: 1000vh;
+}
+
+button {
+  cursor: pointer;
+}
+
